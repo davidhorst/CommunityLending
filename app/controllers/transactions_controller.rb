@@ -16,9 +16,13 @@ class TransactionsController < ApplicationController
     loanparams = params.require(:loan).permit(:amount, :to, :for)
     borrower = User.find(loanparams[:to])
     request = Request.find(loanparams[:for])
-    Transaction.create(lender:current_user, borrower:borrower, request:request, amount: loanparams[:amount])
-    newval = User.find(session[:user_id]).money - loanparams[:amount].to_f
-    User.find(session[:user_id]).update(money: newval)
+    if loanparams[:amount].to_f > User.find(session[:user_id]).money
+      flash[:notice] = "you dont have enough funds for this"
+    else
+      Transaction.create(lender:current_user, borrower:borrower, request:request, amount: loanparams[:amount])
+      newval = User.find(session[:user_id]).money - loanparams[:amount].to_f
+      User.find(session[:user_id]).update(money: newval)
+    end
     redirect_to '/transactions/lender/' + session[:user_id].to_s
   end
 end

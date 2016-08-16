@@ -3,6 +3,9 @@
 <a href="/sessions/logout">Logout</a>
 
 <h3>List of People in need</h3>
+<% if flash[:notice] %>
+  <%= flash[:notice]%>
+<% end %>
 <table class="table table-striped">
   <thead>
     <th>Name</th>
