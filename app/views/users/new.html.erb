@@ -1,0 +1,123 @@
+<div class="col-sm-5">
+<h1>Lender</h1>
+
+<% if flash[:notice] %>
+  <% flash[:notice].each do |notice| %>
+    <p><%= notice %></p>
+  <% end %>
+<% end %>
+<form class="form form-horizontal" action="/users/createlender" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="first_name">First Name:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="user[first_name]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="last_name">Last Name:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="user[last_name]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="email">Email:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="user[email]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="password">Password:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="password" name="user[password]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="password_confirmation">Password Confirmation:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="password" name="user[password_confirmation]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="">Money:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="user[money]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-3 col-sm-offset-9">
+      <input class="btn btn-primary" type="submit" name="submit" value="Start Lending">
+    </div>
+  </div>
+</form>
+<p>Already a memeber? Well what are you doing here??!</p>
+<p><a href="/sessions/new">Sign in here!</a></p>
+</div>
+<div class="col-sm-6">
+<h1>Borrower</h1>
+
+<% if flash[:notice] %>
+  <% flash[:notice].each do |notice| %>
+    <p><%= notice %></p>
+  <% end %>
+<% end %>
+<form class="form form-horizontal" action="/users/createborrower" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <input type="hidden" name="user[money]" value="0">
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="first_name">First Name:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="user[first_name]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="last_name">Last Name:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="user[last_name]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="email">Email:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="user[email]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="password">Password:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="password" name="user[password]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="password_confirmation">Password Confirmation:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="password" name="user[password_confirmation]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="need_title">Need Money For:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="request[title]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="need_desription">Need Money For:</label>
+    <div class="col-sm-9">
+      <textarea class="form-control" name="request[description]" rows="8" cols="40"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label col-sm-3" for="">Money:</label>
+    <div class="col-sm-9">
+      <input class="form-control" type="text" name="request[amount]" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-3 col-sm-offset-9">
+      <input class="btn btn-primary" type="submit" name="submit" value="Start Lending">
+    </div>
+  </div>
+</form>
+<p>Already a memeber? Well what are you doing here??!</p>
+<p><a href="/sessions/new">Sign in here!</a></p>
+</div>

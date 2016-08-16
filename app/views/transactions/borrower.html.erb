@@ -1,0 +1,24 @@
+<p><%= @current_user.first_name %></p>
+<a href="/sessions/logout">Logout</a>
+
+<% @request.each do |request|%>
+  <p> amount need: <%= request.amount%></p>
+  <p> amount raise: <%= request.transactions.sum(:amount)%>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <th>name</th>
+    <th>email</th>
+    <th>amount</th>
+  </thead>
+  <tbody>
+    <% @transactions.each do |tx| %>
+      <tr>
+        <td><%= tx.lender.first_name%> <%= tx.lender.last_name%></td>
+        <td><%= tx.lender.email%></td>
+        <td><%= tx.amount%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

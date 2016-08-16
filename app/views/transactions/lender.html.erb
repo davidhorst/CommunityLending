@@ -1,0 +1,58 @@
+<p><%= @current_user.first_name %></p>
+<p><%=@current_user.money %></p>
+<a href="/sessions/logout">Logout</a>
+
+<h3>List of People in need</h3>
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Need Money For</th>
+    <th>Reason for loan</th>
+    <th>Amount needed</th>
+    <th>Amount loaned</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <% @needs.each do |need| %>
+    <tr>
+      <td><%=need.user.first_name%><%=need.user.last_name%></td>
+      <td><%=need.title%></td>
+      <td><%=need.description%></td>
+      <td><%=need.amount%></td>
+      <td><%=need.transactions.sum(:amount)%></td>
+      <td>
+        <form action="/transactions/create" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+          <input type="hidden" name="loan[to]" value="<%=need.user.id%>">
+          <input type="hidden" name="loan[for]" value="<%=need.id%>">
+          <input type="text" name="loan[amount]" value="">
+          <input type="submit" name="submit" value="submit">
+        </form>
+      </td>
+    <tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3> List of your loans </h3>
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Need Money For</th>
+    <th>Reason for loan</th>
+    <th>Amount needed</th>
+    <th>Amount Raised</th>
+    <th>Amount Lent</th>
+  </thead>
+  <tbody>
+    <% @loans.each do |loan| %>
+    <tr>
+      <td><%=loan.borrower.first_name%><%=loan.borrower.last_name%></td>
+      <td><%=loan.request.title%></td>
+      <td><%=loan.request.description%></td>
+      <td><%=loan.request.amount%></td>
+      <td><%=loan.amount%></td>
+      <td><%=loan.request.transactions.sum(:amount)%></td>
+    <% end %>
+  </tbody>
+</table>
